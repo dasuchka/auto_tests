@@ -2,6 +2,7 @@ import time
 import pytest
 import sys
 from .pages.product_page import ProductPage
+from .pages.basket_page import BasketPage
 
 #run file:  py -m pytest -v -s --tb=line test_product_page.py
 
@@ -63,3 +64,13 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.should_be_login_link()
     page.go_to_login_page()
     page.should_be_login_url()
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_basket_link()
+    page.go_to_basket()
+    page.should_be_basket_url()
+    basket_page = BasketPage(browser, browser.current_url)
+    basket_page.basket_should_be_empty()

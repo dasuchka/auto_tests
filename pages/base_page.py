@@ -22,7 +22,7 @@ class BasePage():
 
     def should_be_login_url(self):
         url = self.browser.current_url
-        assert 'login' in url, 'no substring "login" in url'
+        assert 'login' in url, 'No substring "login" in url'
 
     def is_element_present(self, how, what):
         try:
@@ -46,6 +46,19 @@ class BasePage():
             return False
 
         return True
+
+    def go_to_basket(self):
+        link=self.browser.find_element(*BasePageLocators.BASKET)
+        link.click()
+
+    def should_be_basket_link(self):
+        assert self.is_element_present(*BasePageLocators.BASKET), 'No basket link on page'
+
+    def should_be_basket_url(self):
+        url = self.browser.current_url
+        assert "basket" in url, "Not a basket link"
+
+
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]

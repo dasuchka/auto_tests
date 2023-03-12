@@ -44,3 +44,4 @@ class ProductPage(BasePage):
     def should_message_dissapear(self):
         assert self.is_disappeared(*ProductPageLocators.MESSAGE_ADD_BOOK), \
             "Message is not dissapeared, but should be"
+
