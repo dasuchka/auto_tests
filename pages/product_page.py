@@ -36,3 +36,11 @@ class ProductPage(BasePage):
         self.should_be_messages_about_book_name_price()
         self.should_be_book_name_the_same()
         self.should_be_book_price_the_same()
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_ADD_BOOK), \
+            "Success message is presented, but should not be"
+
+    def should_message_dissapear(self):
+        assert self.is_disappeared(*ProductPageLocators.MESSAGE_ADD_BOOK), \
+            "Message is not dissapeared, but should be"
